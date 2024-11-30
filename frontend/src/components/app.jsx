@@ -29,7 +29,7 @@ const App = () => {
                 <Navigate to="/home" />
               )
             ) : (
-              <Switch onLogin={handleLogin} />
+              <Login onLogin={handleLogin} />
             )
           }
         />
@@ -46,12 +46,9 @@ const App = () => {
 
         {/* Ruta de redirección para no autenticados */}
         {!auth.isAuthenticated && <Route path="*" element={<Navigate to="/login" />} />}
-
       </Routes>
     </BrowserRouter>
   );
 };
 
 export default App;
-
-

@@ -11,7 +11,7 @@ const app = express();
 
 // Configuración de CORS para permitir solicitudes desde localhost:3000
 const corsOptions = {
-  origin: 'http://localhost:3000',  // Permite solicitudes desde tu frontend
+  origin: ['http://localhost:3000','http://localhost:5050'],  // Permite solicitudes desde tu frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
   credentials: true,  // Permite enviar cookies si es necesario
 };

@@ -1,14 +1,30 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('usuario'); // Estado para manejar el rol del usuario
+  const [role, setRole] = useState('usuario');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Llama al método onLogin con el rol seleccionado
-    onLogin(role);
+
+    try {
+      // Enviar las credenciales al backend
+
+      console.log(email,password);
+
+      const { data } = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+
+      // Si el login es exitoso, guarda el token en localStorage
+      localStorage.setItem('token', data.token);
+      
+      // Llama a onLogin pasando el rol del usuario
+      onLogin(role);
+    } catch (error) {
+      console.error('Error de login 2', error);
+      alert('Credenciales incorrectas');
+    }
   };
 
   return (
