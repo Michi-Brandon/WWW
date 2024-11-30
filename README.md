@@ -17,7 +17,7 @@ npm install
 
 3. Crea un archivo .env con las siguientes variables (ajústalas según tu configuración):
 
-MONGO_URI=<tu_cadena_de_conexión_mongodb>
+MONGO_URI=<mongodb://localhost:27017>
 PORT=5000
 
 4. Ejecuta el servidor en modo desarrollo:
