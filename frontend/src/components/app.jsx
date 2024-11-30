@@ -7,8 +7,8 @@ import Switch from './switch';
 
 const App = () => {
   const [auth, setAuth] = useState({
-    isAuthenticated: localStorage.getItem('token' ? true:false),
-    role: localStorage.getItem('role'), // 'usuario' o 'admin'
+    isAuthenticated: localStorage.getItem('token') ? true : false,  // Corregido
+    role: localStorage.getItem('role'),  // 'usuario' o 'admin'
   });
 
   const handleLogin = (role) => {

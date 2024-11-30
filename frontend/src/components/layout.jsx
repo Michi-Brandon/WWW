@@ -11,7 +11,6 @@ const Layout = ({ onLogout }) => {
       <h1 className='layout__title'>Escuela Prestigiosa</h1>
       <NavBar />
       <div className='layout__page'>
-        {/* Verifica que el botón esté aquí */}
         <button onClick={onLogout}>Logout</button> {/* Botón de logout */}
         <Routes>
           <Route path='' element={<HomePage />} />
