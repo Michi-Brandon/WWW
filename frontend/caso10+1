@@ -1,0 +1,9 @@
+### *Caso 11: Sistema de Pañol*
+*Idea principal*: Automatizar la gestión de préstamos y devoluciones de materiales en las escuelas.  
+*Qué se debe hacer*: Desarrollar un sistema local y web para gestionar préstamos, inventarios, usuarios y solicitudes, mejorando la eficiencia y control.  
+*Requerimientos detallados*:
+1. *Autenticación de usuarios*: Registro, autenticación y gestión de perfiles con permisos diferenciados.  
+2. *Gestión de inventario*: Registro de materiales con control de stock y alertas.  
+3. *Gestión de solicitudes y préstamos*: Solicitudes online, validación, registro de devoluciones con estado de recursos.  
+4. *Reportes y alertas*: Reportes por usuario y material, alertas de devoluciones atrasadas y morosidad.
+
