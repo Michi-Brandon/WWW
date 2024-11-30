@@ -7,12 +7,20 @@ import Switch from './switch';
 
 const App = () => {
   const [auth, setAuth] = useState({
-    isAuthenticated: false,
-    role: null, // 'usuario' o 'admin'
+    isAuthenticated: localStorage.getItem('token' ? true:false),
+    role: localStorage.getItem('role'), // 'usuario' o 'admin'
   });
 
   const handleLogin = (role) => {
     setAuth({ isAuthenticated: true, role });
+    localStorage.setItem('token', 'userToken');  // Guarda el token en el localStorage
+    localStorage.setItem('role', role);  // Guarda el rol en el localStorage
+  };
+
+  const handleLogout = () => {
+    setAuth({ isAuthenticated: false, role: null });
+    localStorage.removeItem('token');  // Elimina el token de localStorage
+    localStorage.removeItem('role');  // Elimina el rol de localStorage
   };
 
   return (
@@ -41,7 +49,7 @@ const App = () => {
 
         {/* Ruta para los usuarios */}
         {auth.isAuthenticated && auth.role === 'usuario' && (
-          <Route path="/home/*" element={<Layout />} />
+          <Route path="/home/*" element={<Layout onLogout={handleLogout} />} />
         )}
 
         {/* Ruta de redirección para no autenticados */}

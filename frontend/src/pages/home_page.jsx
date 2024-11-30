@@ -11,7 +11,7 @@ export const HomePage = () => {
 
   // Manejar la apertura del modal
   const handleShow = (material) => {
-    console.log("deberia habrir la materia card");
+    console.log("Debería abrir la materia card");
     setSelectedMaterial(material);
     setShow(true);
   };
@@ -21,6 +21,10 @@ export const HomePage = () => {
 
   const startIndex = (page - 1) * itemsPerPage;
   const paginatedMaterials = materials.slice(startIndex, startIndex + itemsPerPage);
+
+  const token = localStorage.getItem('token');  // Obtener el token del localStorage
+
+  console.log('Token del usuario logueado:', token);  // Puedes usar el token aquí, por ejemplo, para mostrarlo o enviarlo a un backend.
 
   return (
     <>
