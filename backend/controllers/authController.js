@@ -7,7 +7,7 @@ dotenv.config(); // Cargar las variables de entorno desde .env
 
 // Registrar nuevo usuario
 const registerUser = async (req, res) => {
-  const { firstName, lastName1, lastName2, email, password, role } = req.body;
+  const { name, email, password, role } = req.body;
 
   try {
     // Verificar si el usuario ya existe
@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
     }
 
     // Crear el nuevo usuario (la contraseña será cifrada automáticamente por el middleware pre('save'))
-    const user = await User.create({ firstName, lastName1, lastName2, email, password, role });
+    const user = await User.create({ name, email, password, role });
     
     // Crear un token JWT para el usuario
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
@@ -26,7 +26,7 @@ const registerUser = async (req, res) => {
     res.status(201).json({ token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al registrar usuario' });
+    res.status(500).json({ message: 'Error al registrar usuario 2' });
   }
 };
 

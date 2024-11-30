@@ -4,24 +4,14 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  firstName: { type: String, required: true },
-  lastName1: { type: String, required: true },
-  lastName2: { type: String },
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  phoneNumber: { type: String },
+  password: { type: String, required: true },
   role: {
     type: String,
     enum: ['Admin', 'StoreroomManager', 'Coordinator', 'Teacher', 'Student'],
     required: true
-  },
-  idNumber: { type: String, required: true, unique: true },
-  career: { type: String },
-  status: {
-    type: String,
-    enum: ['active', 'delinquent', 'blocked'],
-    default: 'active'
-  },
-  password: { type: String, required: true }
+  }
 }, { timestamps: true });
 
 // Middleware to hash password before saving it to the database
