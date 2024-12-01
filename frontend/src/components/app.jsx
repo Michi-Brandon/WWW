@@ -48,7 +48,7 @@ const App = () => {
 
         {/* Ruta para los administradores */}
         {auth.isAuthenticated && auth.role === 'admin' && (
-          <Route path="/admin/*" element={<Layout_admin />} />
+          <Route path="/admin/*" element={<Layout_admin onLogout={handleLogout} />} />
         )}
 
         {/* Ruta para los usuarios */}
