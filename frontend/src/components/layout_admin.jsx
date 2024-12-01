@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import NavBar from '../components/nav_bar_admin'
 import AdminSection from '../pages/admin_page'
-// import AdminUser from '../pages/admin_user_page'
+import AdminUser from '../pages/admin_user_page'
 
 const Layout_admin = ({ onLogout }) => {
   return (
@@ -15,7 +15,7 @@ const Layout_admin = ({ onLogout }) => {
         <Routes>
           <Route path='' element={<AdminSection />} />
           <Route path='autenticar-usuario' element={<AdminSection />} />
-          <Route path='administrar-usuario' element={<AdminSection />} />
+          <Route path='administrar-usuario' element={<AdminUser />} />
           <Route path='administrar-inventario' element={<AdminSection />} />
           <Route path='generar-reportes' element={<AdminSection />} />
           <Route path='administrar-solicitudes' element={<AdminSection />} />
