@@ -6,89 +6,79 @@ const RequestList = ({ requests, selectedRequest, onSelect, page, setPage, items
   const paginatedRequests = requests.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div className="card h-100">
-      <div className="card-header bg-primary text-white d-flex justify-content-between">
-        <h5 className="mb-0">Solicitudes</h5>
-        <div>
-          <button
-            className="btn btn-sm btn-light me-1"
-            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-            disabled={page === 1}
-          >
-            &lt;
-          </button>
-          <button
-            className="btn btn-sm btn-light"
-            onClick={() => setPage((prev) => (startIndex + itemsPerPage < requests.length ? prev + 1 : prev))}
-            disabled={startIndex + itemsPerPage >= requests.length}
-          >
-            &gt;
-          </button>
-        </div>
-      </div>
-      <ul className="list-group list-group-flush">
+    <div className="request-list">
+      <h2>Solicitudes</h2>
+      <ul>
         {paginatedRequests.map((request) => (
           <li
             key={request.id}
-            className={`list-group-item ${
-              selectedRequest?.id === request.id ? 'active' : ''
-            }`}
+            className={selectedRequest?.id === request.id ? 'active' : ''}
             onClick={() => onSelect(request)}
-            style={{ cursor: 'pointer' }}
           >
-            <div className="d-flex justify-content-between">
-              <span>{request.title}</span>
-              <small className="text-muted">{request.date}</small>
-            </div>
+            <div className="request-title">{request.title}</div>
+            <div className="request-date">{request.date}</div>
           </li>
         ))}
       </ul>
+      <div className="pagination-controls">
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
+          &lt;
+        </button>
+        <button
+          onClick={() => setPage((prev) => (startIndex + itemsPerPage < requests.length ? prev + 1 : prev))}
+          disabled={startIndex + itemsPerPage >= requests.length}
+        >
+          &gt;
+        </button>
+      </div>
     </div>
   );
 };
 
-const RequestDetails = ({ selectedRequest }) => {
+const RequestDetails = ({ selectedRequest, onClose }) => {
   return (
-    <div className="card h-100">
-      <div className="card-body">
-        {selectedRequest ? (
-          <>
-            <h5 className="card-title">Detalles de la Solicitud</h5>
-            <p>
-              <strong>Nombre:</strong> {selectedRequest.title}
-            </p>
-            <p>
-              <strong>Descripción:</strong> {selectedRequest.description}
-            </p>
-            <p>
-              <strong>Fecha de Petición:</strong> {selectedRequest.date}
-            </p>
-            <p>
-              <strong>Estado:</strong>{' '}
-              <span
-                className={`badge ${
-                  selectedRequest.status === 'Pendiente'
-                    ? 'bg-warning text-dark'
-                    : selectedRequest.status === 'Aprobado'
-                    ? 'bg-success'
-                    : 'bg-danger'
-                }`}
-              >
-                {selectedRequest.status}
-              </span>
-            </p>
-            <a
-              href={selectedRequest.ticket}
-              download
-              className="btn btn-primary"
+    <div className="request-details">
+      <button className="close-button" onClick={onClose}>Cerrar</button>
+      {selectedRequest ? (
+        <>
+          <h2>Detalles de la Solicitud</h2>
+          <p>
+            <strong>Nombre:</strong> {selectedRequest.title}
+          </p>
+          <p>
+            <strong>Descripción:</strong> {selectedRequest.description}
+          </p>
+          <p>
+            <strong>Fecha de Petición:</strong> {selectedRequest.date}
+          </p>
+          <p>
+            <strong>Estado:</strong>{' '}
+            <span
+              className={`badge ${
+                selectedRequest.status === 'Pendiente'
+                  ? 'bg-warning'
+                  : selectedRequest.status === 'Aprobado'
+                  ? 'bg-success'
+                  : 'bg-danger'
+              }`}
             >
-              Descargar Ticket
-            </a>
-          </>
-        ) : (
-          <p>Selecciona una solicitud para ver los detalles.</p>
-        )}
-      </div>
+              {selectedRequest.status}
+            </span>
+          </p>
+          <a
+            href={selectedRequest.ticket}
+            download
+            className="download-ticket"
+          >
+            Descargar Ticket
+          </a>
+        </>
+      ) : (
+        <p>Selecciona una solicitud para ver los detalles.</p>
+      )}
     </div>
   );
 };
@@ -97,12 +87,23 @@ const SolidPage = () => {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
+
+  const handleResize = () => {
+    setIsMobileView(window.innerWidth <= 768);
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
-    <div className="container mt-4">
-      <div className="row">
-        {/* Columna izquierda: Lista de solicitudes */}
-        <div className="col-lg-4 col-md-5 mb-3">
+    <div className="solid-page-container">
+      {isMobileView && selectedRequest ? (
+        <RequestDetails selectedRequest={selectedRequest} onClose={() => setSelectedRequest(null)} />
+      ) : (
+        <>
           <RequestList
             requests={requests}
             selectedRequest={selectedRequest}
@@ -111,13 +112,11 @@ const SolidPage = () => {
             setPage={setPage}
             itemsPerPage={itemsPerPage}
           />
-        </div>
-
-        {/* Columna derecha: Detalles de la solicitud */}
-        <div className="col-lg-8 col-md-7">
-          <RequestDetails selectedRequest={selectedRequest} />
-        </div>
-      </div>
+          {!isMobileView && (
+            <RequestDetails selectedRequest={selectedRequest} />
+          )}
+        </>
+      )}
     </div>
   );
 };

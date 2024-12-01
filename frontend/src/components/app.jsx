@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../pages/login_page';
 import Layout from './Layout';
 import Layout_admin from './Layout_admin';
-import Switch from './switch';
 import Register from '../pages/register_page';
 
 const App = () => {
