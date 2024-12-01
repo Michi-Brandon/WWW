@@ -35,11 +35,12 @@ const Login = ({ onLogin }) => {
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Iniciar Sesión</h2>
+        <h2 className='login-title'>Iniciar Sesión</h2>
 
         <div className="form-group">
           <label htmlFor="email">Correo Electrónico</label>
           <input
+            className='form-imput'
             type="email"
             id="email"
             value={email}
@@ -51,6 +52,7 @@ const Login = ({ onLogin }) => {
         <div className="form-group">
           <label htmlFor="password">Contraseña</label>
           <input
+            className='form-imput'
             type="password"
             id="password"
             value={password}
