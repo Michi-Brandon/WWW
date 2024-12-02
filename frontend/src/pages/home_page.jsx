@@ -51,10 +51,6 @@ export const HomePage = () => {
 
   return (
     <>
-      <div className="d-flex flex-column">
-        <div className="p-3 bg-primary text-white">Inventario de la Biblioteca</div>
-      </div>
-
       <div className="container mt-4">
         <h1>Materiales de Biblioteca</h1>
         <div className="row">
