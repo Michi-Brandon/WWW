@@ -1,7 +1,20 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from 'react';
 
 const InventoryTable = ({ inventoryData }) => {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  // Detectar tamaño de la pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768); // True para pantallas menores a 768px (SM)
+    };
+
+    handleResize(); // Ejecutar en el primer render
+    window.addEventListener('resize', handleResize); // Escuchar cambios de tamaño de pantalla
+
+    return () => window.removeEventListener('resize', handleResize); // Cleanup
+  }, []);
+
   const handleTrack = (item) => {
     if (item.borrower) {
       alert(`El artículo "${item.name}" está prestado a:\nNombre: ${item.borrower.name}\nCorreo: ${item.borrower.email}`);
@@ -18,8 +31,8 @@ const InventoryTable = ({ inventoryData }) => {
           <thead className="thead-dark">
             <tr>
               <th>Nombre</th>
-              <th>Categoría</th>
-              <th>Descripción</th>
+              {!isSmallScreen && <th>Categoría</th>}
+              {!isSmallScreen && <th>Descripción</th>}
               <th>Cantidad</th>
               <th>Estado</th>
               <th>Acciones</th>
@@ -29,8 +42,8 @@ const InventoryTable = ({ inventoryData }) => {
             {inventoryData.map((item) => (
               <tr key={item.id}>
                 <td>{item.name}</td>
-                <td>{item.category}</td>
-                <td>{item.description}</td>
+                {!isSmallScreen && <td>{item.category}</td>}
+                {!isSmallScreen && <td>{item.description}</td>}
                 <td>{item.quantity}</td>
                 <td>{item.status}</td>
                 <td>

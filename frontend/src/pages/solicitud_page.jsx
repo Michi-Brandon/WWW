@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import requests from '../data/solicitud_data';
 
-const RequestList = ({ requests, selectedRequest, onSelect, page, setPage, itemsPerPage }) => {
+const RequestList = ({ requests = [], selectedRequest, onSelect, page, setPage, itemsPerPage }) => {
   const startIndex = (page - 1) * itemsPerPage;
   const paginatedRequests = requests.slice(startIndex, startIndex + itemsPerPage);
 
@@ -38,7 +37,7 @@ const RequestList = ({ requests, selectedRequest, onSelect, page, setPage, items
   );
 };
 
-const RequestDetails = ({ selectedRequest, onClose }) => {
+const RequestDetails = ({ selectedRequest, onClose, onButtonClick }) => {
   return (
     <div className="request-details">
       {selectedRequest ? (
@@ -68,13 +67,14 @@ const RequestDetails = ({ selectedRequest, onClose }) => {
             </span>
           </p>
           <div className="d-flex justify-content-between align-items-center mt-3">
-            <a
-              href={selectedRequest.ticket}
-              download
-              className="btn-common download-ticket"
-            >
-              Descargar Ticket
-            </a>
+          <a
+            href={selectedRequest.ticket}
+            download
+            className="btn-common download-ticket"
+            onClick={onButtonClick} // Solo llamar a la función
+          >
+            Descargar Ticket
+          </a>
             {/* Botón "Cerrar" con el estilo común */}
             <button
               className="btn-common close-button d-lg-none"
@@ -91,7 +91,7 @@ const RequestDetails = ({ selectedRequest, onClose }) => {
   );
 };
 
-const SolidPage = () => {
+const SolidPage = ({ data, generarTicket }) => {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
@@ -112,11 +112,12 @@ const SolidPage = () => {
         <RequestDetails
           selectedRequest={selectedRequest}
           onClose={() => setSelectedRequest(null)}
+          onButtonClick={() => generarTicket(selectedRequest.title, selectedRequest.status, selectedRequest.date)}
         />
       ) : (
         <>
           <RequestList
-            requests={requests}
+            requests={data}
             selectedRequest={selectedRequest}
             onSelect={setSelectedRequest}
             page={page}

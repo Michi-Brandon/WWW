@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const MaterialCard = ({ show, handleClose, title, description, quantity }) => {
+const MaterialCard = ({ show, handleClose, title, description, quantity, onButtonClick}) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
@@ -15,7 +15,7 @@ const MaterialCard = ({ show, handleClose, title, description, quantity }) => {
         <Button variant="secondary" onClick={handleClose}>
           Cerrar
         </Button>
-        <Button variant="success" onClick={() => alert('Solicitud de préstamo enviada')}>
+        <Button variant="success" onClick={onButtonClick}>
           Solicitar Préstamo
         </Button>
       </Modal.Footer>

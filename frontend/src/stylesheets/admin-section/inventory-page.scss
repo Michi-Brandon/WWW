@@ -1,0 +1,12 @@
+/* styles.css */
+.table {
+    font-size: 14px; /* Ajusta el tamaño del texto */
+  }
+  
+  @media (max-width: 576px) {
+    /* Ajustes para pantallas xs */
+    .table {
+      font-size: 12px;
+    }
+  }
+  

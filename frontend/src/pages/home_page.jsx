@@ -1,32 +1,9 @@
 import React, { useState } from 'react';
 import Card from '../components/card';
 import MaterialCard from '../components/materialCard';
-import materials from '../data/card_data';
 
-export const HomePage = () => {
+export const HomePage = ({ materials, handleMaterialCardClick }) => {
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      // Enviar las credenciales al backend
-
-      console.log(email,password);
-
-      const { data } = await axios.post('http://localhost:5000/inventory', { email, password });
-
-      // Si el login es exitoso, guarda el token en localStorage
-      localStorage.setItem('token', data.token);
-
-      console.log(localStorage.getItem('token'));
-      
-      // Llama a onLogin pasando el rol del usuario
-      onLogin(role);
-    } catch (error) {
-      console.error('Error de login 2', error);
-      alert('Credenciales incorrectas');
-    }
-  };
   const [selectedMaterial, setSelectedMaterial] = useState(null); // Material seleccionado
   const [show, setShow] = useState(false); // Control del modal
   const [page, setPage] = useState(1); // Página actual
@@ -97,7 +74,8 @@ export const HomePage = () => {
           title={selectedMaterial.title}
           description={selectedMaterial.description}
           quantity={selectedMaterial.quantity}
-        />
+          onButtonClick={() => handleMaterialCardClick(selectedMaterial.title)}
+          />
       )}
     </>
   );
