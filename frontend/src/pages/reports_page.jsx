@@ -1,25 +1,7 @@
 import React from "react";
 
-const GenerateReports = () => {
-  const generalInventory = [
-    { id: 1, name: "Recurso A", quantity: 10, status: "Disponible" },
-    { id: 2, name: "Recurso B", quantity: 5, status: "No disponible" },
-  ];
-
-  const mostRequestedResources = [
-    { id: 1, name: "Recurso A", requests: 50 },
-    { id: 2, name: "Recurso B", requests: 30 },
-  ];
-
-  const lateReturns = [
-    { resource: "Recurso A", user: "Usuario 1", lateDays: 3 },
-    { resource: "Recurso B", user: "Usuario 2", lateDays: 2 },
-  ];
-
-  const highLossResources = [
-    { name: "Recurso C", losses: 20 },
-    { name: "Recurso D", losses: 15 },
-  ];
+const GenerateReports = ({ generalInventory }) => {
+  const { items, mostRequestedResources, lateReturns, highLossResources } = generalInventory;
 
   return (
     <div className="container mt-5">
@@ -40,7 +22,7 @@ const GenerateReports = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {generalInventory.map((item) => (
+                  {items.map((item) => (
                     <tr key={item.id}>
                       <td>{item.id}</td>
                       <td>{item.name}</td>

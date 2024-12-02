@@ -10,7 +10,7 @@ import GenerateReports from '../pages/reports_page'
 import inventoryData from '../data/inventory_data'
 import solidData from '../data/admin_solid_data'
 import users from '../data/user_data'; // Suponiendo que tienes un archivo con los datos de usuarios
-
+import generalInventory from '../data/repor_data';
 
 const Layout_admin = ({ onLogout }) => {
   // ---------------------adminUser------------------------------------------------
@@ -43,10 +43,14 @@ const Layout_admin = ({ onLogout }) => {
             <InventoryTable inventoryData={inventoryData} darDeBaja={darDeBaja}/>} 
           />
           <Route path='generar-reportes' element={
-            <GenerateReports />} 
+            <GenerateReports generalInventory={generalInventory} />} 
           />
-          <Route path='administrar-solicitudes' element={<AdminSolid solidData={solidData} />} />
-          <Route path='administrar-prestamo' element={<AdminSection />} />
+          <Route path='administrar-solicitudes' element={
+            <AdminSolid solidData={solidData}  />} 
+          />
+          <Route path='administrar-prestamo' element={
+            <AdminSection />} 
+          />
         </Routes>
       </div>
     </div>
