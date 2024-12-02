@@ -16,7 +16,7 @@ const createRequest = async (req, res) => {
 // Obtener una solicitud por ID
 const getRequestById = async (req, res) => {
   try {
-    const request = await Request.findById(req.params.id).populate('requesterId requestedResources.resourceId');
+    const request = await Request.findById(req.params.id).populate('requesterId .resourceId');
     if (!request) {
       return res.status(404).json({ message: 'Solicitud no encontrada' });
     }
@@ -29,7 +29,7 @@ const getRequestById = async (req, res) => {
 // Obtener todas las solicitudes
 const getAllRequests = async (req, res) => {
   try {
-    const requests = await Request.find().populate('requesterId requestedResources.resourceId');
+    const requests = await Request.find().populate('requesterId resourceId');
     res.json(requests);
   } catch (error) {
     res.status(500).json({ message: 'Error al obtener las solicitudes' });

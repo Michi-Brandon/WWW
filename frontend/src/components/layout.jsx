@@ -7,15 +7,22 @@ import UserPage from '../pages/user_page';
 import axios from 'axios';
 
 //import materials from '../data/card_data';
-import requests from '../data/solicitud_data';
+//import requests from '../data/solicitud_data';
 
 const Layout = ({ onLogout }) => {
   const [materials, setMaterials] = useState([]);
+  const [requests, setRequests] = useState([]);
 
   // Obtener los materiales de la API
   useEffect(() => {
     console.log('Obteniendo materiales...');
     getMaterials();
+  }, []);
+
+  // Obtener las solicitudes de la API
+  useEffect(() => {
+    console.log('Obteniendo solicitudes...');
+    getRequests();
   }, []);
 
   const getMaterials = async () => {
@@ -24,6 +31,17 @@ const Layout = ({ onLogout }) => {
       const data = await response.data;
       //console.log('inventario: ',data);
       setMaterials(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getRequests = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/requests');
+      const data = await response.data;
+      //console.log('solicitudes: ',data);
+      setRequests(data);
     } catch (error) {
       console.error(error);
     }
