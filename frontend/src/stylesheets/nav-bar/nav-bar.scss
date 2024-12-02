@@ -97,6 +97,41 @@ html, body {
   margin-right: 1rem; // Espacio a la derecha
 }
 
+// Styles for the dynamic debt status indicator
+.navbar-debt-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  .status-box {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    white-space: nowrap;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .status-warning {
+    background-color: #ffc107;
+    color: #212529; // Texto oscuro para contraste
+  }
+
+  .status-success {
+    background-color: #28a745;
+    color: #ffffff; // Texto blanco para contraste
+  }
+}
+
+// Navbar-specific customizations
+.navbar-custom {
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 // Responsive adjustments
 @media (max-width: 768px) {
   .main-content {
@@ -137,6 +172,12 @@ html, body {
 
   .offcanvas-body .logout-button:hover {
     background-color: #c82333;
+  }
+
+  .navbar-debt-status {
+    .status-box {
+      font-size: 0.9rem;
+    }
   }
 }
 

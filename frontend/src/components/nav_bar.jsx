@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom';
 const NavBar = ({ onButtonClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Estado simulado para el indicador dinámico
+  const debtStatus = "Sin Deudas"; //Acepta "Moroso" y "Sin Deudas"
+  
   const navLinkClass = ({ isActive }) => {
     const classes = ['nav-link'];
     if (isActive) classes.push('active');
@@ -12,13 +15,27 @@ const NavBar = ({ onButtonClick }) => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div className="container-fluid">
+      <nav className="navbar navbar-custom navbar-expand-lg navbar-dark bg-primary">
+        <div className="container-fluid d-flex align-items-center justify-content-between">
           <img
             src="/boxicon.png"
             style={{ height: '40px' }}
             alt="Logo"
           />
+
+          {/* Indicador dinámico */}
+          <div className="navbar-debt-status text-center">
+            {debtStatus === "Moroso" ? (
+              <div className="status-box status-warning">
+                Moroso
+              </div>
+            ) : (
+              <div className="status-box status-success">
+                Sin Deudas
+              </div>
+            )}
+          </div>
+
           <button
             className="navbar-toggler d-lg-none ms-auto"
             type="button"
