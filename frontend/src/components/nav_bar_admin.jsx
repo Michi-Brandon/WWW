@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({ onButtonClick }) => {
   const [role, setRole] = useState('superAdministrador');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -34,10 +34,8 @@ const NavBar = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <img
-            src="/boxicon.png"
-            style={{ height: '40px' }}
-          />
+          <img src="/boxicon.png" style={{ height: '40px' }} alt="Logo" />
+
           <button
             className="navbar-toggler d-lg-none ms-auto"
             type="button"
@@ -67,12 +65,15 @@ const NavBar = () => {
                 id="role"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="form-select form-select-sm"
+                className="form-select form-select-sm me-3"
               >
                 <option value="superAdministrador">Super Administrador</option>
                 <option value="Coordinador">Coordinador</option>
                 <option value="Penolero">Penolero</option>
               </select>
+              <button className="btn btn-danger ms-auto" onClick={onButtonClick}>
+                Logout
+              </button>
             </div>
           </div>
         </div>
@@ -115,6 +116,9 @@ const NavBar = () => {
                 <option value="Penolero">Penolero</option>
               </select>
             </div>
+            <button className="btn btn-danger w-100 mt-3" onClick={onButtonClick}>
+              Logout
+            </button>
           </div>
         </div>
       )}

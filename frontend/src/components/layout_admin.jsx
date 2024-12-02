@@ -16,8 +16,7 @@ const Layout_admin = ({ onLogout }) => {
 
   return (
     <div className='layout'>
-      <NavBar />
-      <button onClick={onLogout}>Logout</button> {/* Botón de logout */}
+      <NavBar onButtonClick={onLogout}/>
       <div className='layout__page'>
         <Routes>
           <Route path='' element={<AdminSection />} />

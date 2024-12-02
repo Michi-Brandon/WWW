@@ -19,7 +19,6 @@ const NavBar = ({ onButtonClick }) => {
             style={{ height: '40px' }}
             alt="Logo"
           />
-
           <button
             className="navbar-toggler d-lg-none ms-auto"
             type="button"
@@ -49,9 +48,13 @@ const NavBar = ({ onButtonClick }) => {
                 </NavLink>
               </li>
             </ul>
+            <button className="btn btn-danger ms-auto" onClick={onButtonClick}>
+              Logout
+            </button>
           </div>
         </div>
       </nav>
+
       {isMenuOpen && (
         <div className="offcanvas-menu">
           <div className="offcanvas-header">
@@ -91,8 +94,9 @@ const NavBar = ({ onButtonClick }) => {
               </li>
             </ul>
           </div>
-          <button onClick={onButtonClick}>Logout</button> {/* Botón de logout */}
-
+          <button className="btn btn-danger w-100 mt-3" onClick={onButtonClick}>
+            Logout
+          </button>
         </div>
       )}
     </div>

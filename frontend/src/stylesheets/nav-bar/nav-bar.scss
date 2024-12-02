@@ -1,16 +1,23 @@
-body {
+// General reset
+html, body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
   box-sizing: border-box;
+  max-width: 100%; // Evita desbordamientos horizontales
+  overflow-x: hidden; // Elimina cualquier desbordamiento horizontal
 }
 
+// Navbar styles
 .navbar {
-  width: 100%;
-  overflow-x: hidden;
-  padding: 0 1rem;
+  width: 100%; // Asegura que la navbar ocupe todo el ancho
+  overflow: hidden; // Previene desbordamientos dentro de la navbar
+  padding: 0 1rem; // Espaciado interno horizontal
+  display: flex; // Asegura un diseño flexible
+  align-items: center; // Centra verticalmente los elementos
+  justify-content: space-between; // Distribuye los elementos correctamente
 }
 
+// Offcanvas menu
 .offcanvas-menu {
   position: fixed;
   top: 0;
@@ -68,21 +75,82 @@ body {
   font-size: 1rem;
 }
 
-.navbar .form-select-sm {
-  min-width: 150px;
-  margin-left: 0.5rem;
+// Logout button for large screens
+.navbar .logout-button {
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
+.navbar .logout-button:hover {
+  background-color: #c82333;
+}
+
+// Main content styles
+.main-content {
+  margin-top: 1rem; // Espaciado superior después de la navbar
+  margin-left: 1rem; // Espacio a la izquierda
+  margin-right: 1rem; // Espacio a la derecha
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0.5rem; // Reduce el margen en pantallas pequeñas
+    margin-right: 0.5rem;
+  }
+
+  .navbar {
+    padding: 0 0.5rem; // Ajusta los márgenes internos de la navbar
+  }
+
+  .offcanvas-menu {
+    padding: 0.5rem; // Ajusta el padding para pantallas pequeñas
+  }
+
+  .offcanvas-body .nav-link {
+    font-size: 0.9rem; // Ajusta el tamaño de la fuente
+  }
+
+  .offcanvas-body select {
+    font-size: 0.9rem; // Ajusta el tamaño del selector
+  }
+
+  .navbar .logout-button {
+    display: none; // Oculta el botón en dispositivos pequeños
+  }
+
+  .offcanvas-body .logout-button {
+    display: block;
+    margin: 1rem 0; // Asegura espaciado en el menú lateral
+    padding: 0.5rem 1rem;
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .offcanvas-body .logout-button:hover {
+    background-color: #c82333;
+  }
+}
+
+// Smallest devices adjustments
 @media (max-width: 330px) {
   .offcanvas-menu {
     padding: 0.5rem;
   }
 
   .offcanvas-body .nav-link {
-    font-size: 0.9rem;
+    font-size: 0.8rem; // Ajusta aún más el tamaño de la fuente
   }
 
   .offcanvas-body select {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 }
