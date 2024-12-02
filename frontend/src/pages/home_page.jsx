@@ -51,7 +51,7 @@ export const HomePage = () => {
 
   return (
     <>
-      <div className="container mt-4">
+      <div className="container mt-4" style={{padding: "0 0 20px 0"}}>
         <h1>Materiales de Biblioteca</h1>
         <div className="row">
           {paginatedMaterials.map((material, index) => (

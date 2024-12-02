@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import requests from '../data/solicitud_data';
 
 const RequestList = ({ requests, selectedRequest, onSelect, page, setPage, itemsPerPage }) => {
@@ -41,7 +41,6 @@ const RequestList = ({ requests, selectedRequest, onSelect, page, setPage, items
 const RequestDetails = ({ selectedRequest, onClose }) => {
   return (
     <div className="request-details">
-      <button className="close-button" onClick={onClose}>Cerrar</button>
       {selectedRequest ? (
         <>
           <h2>Detalles de la Solicitud</h2>
@@ -68,13 +67,22 @@ const RequestDetails = ({ selectedRequest, onClose }) => {
               {selectedRequest.status}
             </span>
           </p>
-          <a
-            href={selectedRequest.ticket}
-            download
-            className="download-ticket"
-          >
-            Descargar Ticket
-          </a>
+          <div className="d-flex justify-content-between align-items-center mt-3">
+            <a
+              href={selectedRequest.ticket}
+              download
+              className="btn-common download-ticket"
+            >
+              Descargar Ticket
+            </a>
+            {/* Botón "Cerrar" con el estilo común */}
+            <button
+              className="btn-common close-button d-lg-none"
+              onClick={onClose}
+            >
+              Cerrar
+            </button>
+          </div>
         </>
       ) : (
         <p>Selecciona una solicitud para ver los detalles.</p>
@@ -87,13 +95,13 @@ const SolidPage = () => {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
-  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 992);
 
   const handleResize = () => {
-    setIsMobileView(window.innerWidth <= 768);
+    setIsMobileView(window.innerWidth <= 992); // Cambiar punto de corte a 992px para incluir tablets
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -101,7 +109,10 @@ const SolidPage = () => {
   return (
     <div className="solid-page-container">
       {isMobileView && selectedRequest ? (
-        <RequestDetails selectedRequest={selectedRequest} onClose={() => setSelectedRequest(null)} />
+        <RequestDetails
+          selectedRequest={selectedRequest}
+          onClose={() => setSelectedRequest(null)}
+        />
       ) : (
         <>
           <RequestList
@@ -113,7 +124,10 @@ const SolidPage = () => {
             itemsPerPage={itemsPerPage}
           />
           {!isMobileView && (
-            <RequestDetails selectedRequest={selectedRequest} />
+            <RequestDetails
+              selectedRequest={selectedRequest}
+              onClose={() => setSelectedRequest(null)}
+            />
           )}
         </>
       )}

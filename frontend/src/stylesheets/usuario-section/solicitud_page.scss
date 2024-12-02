@@ -1,108 +1,157 @@
-/* SolidPage.css */
+/* SolidPage.scss */
 .solid-page-container {
-    display: flex;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    color: #333;
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.request-list {
+  width: 30%;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.request-list h2 {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.request-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.request-list li {
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.request-list li:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.request-list li.active {
+  background-color: #eaeaea;
+  border-color: #999;
+}
+
+.request-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.request-date {
+  font-size: 14px;
+  color: #777;
+}
+
+.request-details {
+  flex: 1;
+  padding: 20px;
+}
+
+.request-details h2 {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.request-details p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.request-details p strong {
+  color: #444;
+}
+
+/* Estilo común para los botones */
+.btn-common {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-common:hover {
+  background-color: #0056b3;
+}
+
+/* Para pantallas de 768px o menores */
+@media (max-width: 768px) {
+  .solid-page-container {
+    flex-direction: column;
   }
-  
+
+  .request-list {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .request-details {
+    padding: 15px;
+  }
+
+  .d-flex {
+    flex-direction: row; /* Los botones se alinean horizontalmente */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .request-details .close-button {
+    display: inline-block;  /* Se muestra en pantallas <= 768px */
+    margin-top: 10px;
+  }
+
+  .request-details .download-ticket {
+    margin-top: 10px;
+  }
+}
+
+/* Para pantallas de 769px o mayores */
+@media (min-width: 769px) {
+  .solid-page-container {
+    flex-direction: row; /* Mantén la distribución en fila */
+  }
+
   .request-list {
     width: 30%;
-    background-color: #f4f4f4;
+    height: 100%;
     border-right: 1px solid #ddd;
-    overflow-y: auto;
-    padding: 20px;
   }
-  
-  .request-list h2 {
-    margin-bottom: 20px;
-    color: #555;
-  }
-  
-  .request-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .request-list li {
-    padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-  }
-  
-  .request-list li:hover {
-    background-color: #f0f0f0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .request-list li.active {
-    background-color: #eaeaea;
-    border-color: #999;
-  }
-  
-  .request-title {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .request-date {
-    font-size: 14px;
-    color: #777;
-  }
-  
+
   .request-details {
-    flex: 1;
     padding: 20px;
   }
-  
-  .request-details h2 {
-    margin-bottom: 20px;
-    color: #555;
+
+  .close-button {
+    display: none; /* El botón Cerrar no se muestra en pantallas mayores a 768px */
   }
-  
-  .request-details p {
-    margin: 10px 0;
-    font-size: 16px;
+
+  .d-flex {
+    flex-direction: row; /* Los botones se alinean horizontalmente */
+    justify-content: space-between;
+    align-items: center;
   }
-  
-  .request-details p strong {
-    color: #444;
+
+  .request-details .btn {
+    margin-top: 0;
   }
-  
-  .download-ticket {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .download-ticket:hover {
-    background-color: #0056b3;
-  }
-  
-  @media (max-width: 768px) {
-    .solid-page-container {
-      flex-direction: column;
-    }
-  
-    .request-list {
-      width: 100%;
-      height: auto;
-      border-right: none;
-      border-bottom: 1px solid #ddd;
-    }
-  
-    .request-details {
-      padding: 15px;
-    }
-  }
-  
+}
