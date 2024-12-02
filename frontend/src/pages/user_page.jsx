@@ -5,16 +5,16 @@ const UserPage = ({ user, isEditing, formData, onEditClick, onInputChange, onSav
     <div className="user-page-container">
       <h1>Información del Usuario</h1>
 
-      <div className="user-details">
-        <p><strong>Nombre:</strong> {user.name}</p>
-        <p><strong>Correo:</strong> {user.email}</p>
-        <p><strong>Rol:</strong> {user.role}</p>
-        <button onClick={onEditClick} className="edit-button">Editar Datos</button>
-      </div>
+      <div className="user-content">
+        <div className="user-details">
+          <p><strong>Nombre:</strong> {user.name}</p>
+          <p><strong>Correo:</strong> {user.email}</p>
+          <p><strong>Rol:</strong> {user.role}</p>
+          <button onClick={onEditClick} className="edit-button">Editar Datos</button>
+        </div>
 
-      {isEditing && (
-        <div className="edit-modal">
-          <div className="edit-modal-content">
+        {isEditing && (
+          <div className="edit-form">
             <h2>Editar Información</h2>
             <form onSubmit={onSave}>
               <div className="form-group">
@@ -56,8 +56,8 @@ const UserPage = ({ user, isEditing, formData, onEditClick, onInputChange, onSav
               </div>
             </form>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
