@@ -4,8 +4,8 @@ import NavBar from '../components/nav_bar_admin'
 import AdminSection from '../pages/admin_page'
 import AdminUser from '../pages/admin_user_page'
 import InventoryTable from '../pages/inventory_page'
-
 import inventoryData from '../data/inventory_data'
+import GenerateReports from '../pages/reports_page'
 
 const Layout_admin = ({ onLogout }) => {
   // Función para dar de baja productos
@@ -24,7 +24,7 @@ const Layout_admin = ({ onLogout }) => {
           <Route path='administrar-inventario' element={
             <InventoryTable inventoryData={inventoryData} darDeBaja={darDeBaja}/>} 
           />
-          <Route path='generar-reportes' element={<AdminSection />} />
+          <Route path='generar-reportes' element={<GenerateReports />} />
           <Route path='administrar-solicitudes' element={<AdminSection />} />
           <Route path='administrar-prestamo' element={<AdminSection />} />
         </Routes>
