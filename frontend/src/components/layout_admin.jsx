@@ -1,11 +1,9 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-
 import NavBar from '../components/nav_bar_admin'
 import AdminSection from '../pages/admin_page'
 import AdminUser from '../pages/admin_user_page'
 import InventoryTable from '../pages/inventory_page'
-
 import inventoryData from '../data/inventory_data'
 
 const Layout_admin = ({ onLogout }) => {

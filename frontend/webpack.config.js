@@ -13,7 +13,8 @@ module.exports = (_, argv) => ({
       filename: '[name].[contenthash].css'
     }),
     new HtmlWebpackPlugin({
-      title: 'Sistema de Pañol'
+      title: 'Sistema de Pañol',
+      favicon: './src/assets/boxicon.png'
     })
   ],
   resolve: {

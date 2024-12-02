@@ -26,17 +26,20 @@ const NavBar = () => {
       { label: 'Administrar Inventario', path: 'administrar-inventario' },
       { label: 'Administrar Solicitudes', path: 'administrar-solicitudes' },
       { label: 'Administrar Préstamos', path: 'administrar-prestamos' },
-      { label: 'Generar Reporte', path: 'generar-reportes' },
+      { label: 'Generar Reportes', path: 'generar-reportes' },
     ],
   };
 
   return (
     <div>
-      {/* Navbar responsiva */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
+          <img
+            src="/boxicon.png"
+            style={{ height: '40px' }}
+          />
           <button
-            className="navbar-toggler d-lg-none"
+            className="navbar-toggler d-lg-none ms-auto"
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-controls="offcanvasMenu"
@@ -45,8 +48,6 @@ const NavBar = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
-          <span className="navbar-brand">Sistema</span>
 
           <div className="collapse navbar-collapse d-none d-lg-flex">
             <ul className="navbar-nav me-auto">
@@ -77,7 +78,6 @@ const NavBar = () => {
         </div>
       </nav>
 
-      {/* Menú off-canvas */}
       {isMenuOpen && (
         <div className="offcanvas-menu">
           <div className="offcanvas-header">
@@ -121,5 +121,4 @@ const NavBar = () => {
     </div>
   );
 };
-
 export default NavBar;

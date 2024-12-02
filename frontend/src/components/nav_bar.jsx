@@ -1,34 +1,100 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
-export const NavBar = () => {
+const NavBar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const navLinkClass = ({ isActive }) => {
-    const classes = ['nav-bar__link']
-    if (isActive) classes.push('nav-bar__link--active')
-    return classes.join(' ')
-  }
+    const classes = ['nav-link'];
+    if (isActive) classes.push('active');
+    return classes.join(' ');
+  };
+
   return (
-    <nav className='nav-bar'>
-      <NavLink  
-        className={navLinkClass}
-        to=''
-      >
-        Inicio
-      </NavLink>
-      <NavLink
-        className={navLinkClass}
-        to='solicitudes'
-      >
-        mis solicitudes
-      </NavLink>
-      <NavLink
-        className={navLinkClass}
-        to='usuario'
-      >
-        usuario
-      </NavLink>
-    </nav>
-  )
-}
- 
-export default NavBar
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div className="container-fluid">
+          <img
+            src="/boxicon.png"
+            style={{ height: '40px' }}
+            alt="Logo"
+          />
+
+          <button
+            className="navbar-toggler d-lg-none ms-auto"
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-controls="offcanvasMenu"
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse d-none d-lg-flex">
+            <ul className="navbar-nav me-auto">
+              <li className="nav-item">
+                <NavLink className={navLinkClass} to="">
+                  Inicio
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className={navLinkClass} to="solicitudes">
+                  Mis Solicitudes
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className={navLinkClass} to="usuario">
+                  Usuario
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      {isMenuOpen && (
+        <div className="offcanvas-menu">
+          <div className="offcanvas-header">
+            <button
+              className="btn-close btn-close-white"
+              onClick={() => setIsMenuOpen(false)}
+            ></button>
+          </div>
+          <div className="offcanvas-body">
+            <ul className="list-unstyled">
+              <li className="nav-item">
+                <NavLink
+                  className={navLinkClass}
+                  to=""
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Inicio
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className={navLinkClass}
+                  to="solicitudes"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Mis Solicitudes
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className={navLinkClass}
+                  to="usuario"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Usuario
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default NavBar;
