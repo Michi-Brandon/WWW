@@ -21,8 +21,11 @@ const Login = ({ onLogin }) => {
 
       // Si el login es exitoso, guarda el token en localStorage
       localStorage.setItem('token', data.token);
+      localStorage.setItem('email', data.user.email);
+      localStorage.setItem('role', data.user.role);
+      localStorage.setItem('name', data.user.name);
 
-      console.log(localStorage.getItem('token'));
+      console.log(localStorage);
       
       // Llama a onLogin pasando el rol del usuario
       onLogin(role);

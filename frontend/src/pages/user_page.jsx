@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 // import './UserPage.css';
 
 const UserPage = () => {
+  console.log('UserPage');
+  console.log(localStorage);
   const [user, setUser] = useState({
-    nombre: 'Juan Pérez',
-    correo: 'juan.perez@example.com',
-    contrasena: '',
-    rol: 'Estudiante',
-    estado: 'Habilitado'
+    name: localStorage.name,
+    email: localStorage.email,
+    password: '',
+    role: localStorage.role,
   });
 
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({ nombre: '', correo: '', contrasena: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
 
   const handleEditClick = () => {
-    setFormData({ nombre: user.nombre, correo: user.correo, contrasena: '' });
+    setFormData({ name: user.name, email: user.email, password: '' });
     setIsEditing(true);
   };
 
@@ -26,6 +27,9 @@ const UserPage = () => {
   const handleSave = (e) => {
     e.preventDefault();
     setUser({ ...user, ...formData });
+    localStorage.setItem('name', formData.name);
+    localStorage.setItem('email', formData.email);
+    //Falta mandar consulta al backend para actualizar la información
     setIsEditing(false);
   };
 
@@ -38,10 +42,10 @@ const UserPage = () => {
       <h1>Información del Usuario</h1>
 
       <div className="user-details">
-        <p><strong>Nombre:</strong> {user.nombre}</p>
-        <p><strong>Correo:</strong> {user.correo}</p>
-        <p><strong>Rol:</strong> {user.rol}</p>
-        <p><strong>Estado:</strong> {user.estado}</p>
+        <p><strong>Nombre:</strong> {user.name}</p>
+        <p><strong>Correo:</strong> {user.email}</p>
+        <p><strong>Rol:</strong> {user.role}</p>
+        {/* <p><strong>Estado:</strong> {user.estado}</p> */}
         <button onClick={handleEditClick} className="edit-button">Editar Datos</button>
       </div>
 
@@ -51,34 +55,34 @@ const UserPage = () => {
             <h2>Editar Información</h2>
             <form onSubmit={handleSave}>
               <div className="form-group">
-                <label htmlFor="nombre">Nombre:</label>
+                <label htmlFor="name">Nombre:</label>
                 <input
                   type="text"
-                  id="nombre"
-                  name="nombre"
-                  value={formData.nombre}
+                  id="name"
+                  name="name"
+                  value={formData.name}
                   onChange={handleInputChange}
                   required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="correo">Correo:</label>
+                <label htmlFor="email">Correo:</label>
                 <input
                   type="email"
-                  id="correo"
-                  name="correo"
-                  value={formData.correo}
+                  id="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleInputChange}
                   required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="contrasena">Contraseña:</label>
+                <label htmlFor="password">Contraseña:</label>
                 <input
                   type="password"
-                  id="contrasena"
-                  name="contrasena"
-                  value={formData.contrasena}
+                  id="password"
+                  name="password"
+                  value={formData.password}
                   onChange={handleInputChange}
                   placeholder="Dejar en blanco para no cambiar"
                 />
