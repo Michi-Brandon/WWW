@@ -65,9 +65,8 @@ const Layout = ({ onLogout }) => {
 
   return (
     <div className='layout'>
-      <NavBar />
+      <NavBar onButtonClick={onLogout}/>
       <div className='layout__page'>
-        <button onClick={onLogout}>Logout</button> {/* Botón de logout */}
         <Routes>
           <Route path='' element={
             <HomePage materials={materials} handleMaterialCardClick={handleMaterialCardClick} />} 

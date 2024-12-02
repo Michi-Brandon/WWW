@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({ onButtonClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinkClass = ({ isActive }) => {
@@ -91,6 +91,8 @@ const NavBar = () => {
               </li>
             </ul>
           </div>
+          <button onClick={onButtonClick}>Logout</button> {/* Botón de logout */}
+
         </div>
       )}
     </div>

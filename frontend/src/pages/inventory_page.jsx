@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const InventoryTable = ({ inventoryData }) => {
+const InventoryTable = ({ inventoryData, darDeBaja }) => {
+  console.log(inventoryData)
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   // Detectar tamaño de la pantalla
@@ -15,14 +16,6 @@ const InventoryTable = ({ inventoryData }) => {
     return () => window.removeEventListener('resize', handleResize); // Cleanup
   }, []);
 
-  const handleTrack = (item) => {
-    if (item.borrower) {
-      alert(`El artículo "${item.name}" está prestado a:\nNombre: ${item.borrower.name}\nCorreo: ${item.borrower.email}`);
-    } else {
-      alert(`El artículo "${item.name}" está disponible.`);
-    }
-  };
-
   return (
     <div className="container-fluid mt-4">
       <h2 className="text-center">Inventario de la Biblioteca</h2>
@@ -30,28 +23,26 @@ const InventoryTable = ({ inventoryData }) => {
         <table className="table table-bordered table-striped">
           <thead className="thead-dark">
             <tr>
-              <th>Nombre</th>
-              {!isSmallScreen && <th>Categoría</th>}
-              {!isSmallScreen && <th>Descripción</th>}
+              <th>Título</th>
+              <th>Descripción</th>
               <th>Cantidad</th>
               <th>Estado</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {inventoryData.map((item) => (
-              <tr key={item.id}>
+            {inventoryData.map((item, index) => (
+              <tr key={index}>
                 <td>{item.name}</td>
-                {!isSmallScreen && <td>{item.category}</td>}
-                {!isSmallScreen && <td>{item.description}</td>}
+                <td>{item.description}</td>
                 <td>{item.quantity}</td>
                 <td>{item.status}</td>
                 <td>
                   <button
                     className="btn btn-primary btn-sm"
-                    onClick={() => handleTrack(item)}
+                    onClick={() => darDeBaja(item.title, index)}
                   >
-                    Rastrear
+                    Dar de baja
                   </button>
                 </td>
               </tr>
