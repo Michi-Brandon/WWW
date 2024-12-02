@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import users from '../data/user_data'; // Suponiendo que tienes un archivo con los datos de usuarios
 
 const UserList = ({ users, selectedUser, onSelect, page, setPage, itemsPerPage }) => {
   const startIndex = (page - 1) * itemsPerPage;
@@ -89,7 +88,7 @@ const UserDetails = ({ selectedUser, onBlock }) => {
   );
 };
 
-const AdminUser = () => {
+const AdminUser = ({ users, onButtonClick}) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
@@ -116,7 +115,7 @@ const AdminUser = () => {
 
         {/* Columna derecha: Detalles del usuario */}
         <div className="col-lg-8 col-md-7">
-          <UserDetails selectedUser={selectedUser} onBlock={handleBlockUser} />
+          <UserDetails selectedUser={selectedUser} onBlock={onButtonClick} />
         </div>
       </div>
     </div>

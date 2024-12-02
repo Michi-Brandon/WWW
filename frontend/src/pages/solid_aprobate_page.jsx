@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-const AdminSolid = ({ solidData }) => {
+const AdminSolid = ({ solidData, onButtonClick }) => {
   const [selectedSolid, setSelectedSolid] = useState(null);
 
   const handleApprove = (solid) => {
