@@ -13,19 +13,16 @@ const NavBar = () => {
   // Opciones de navegación por rol
   const menuOptions = {
     superAdministrador: [
-      { label: 'Autenticar Usuario', path: 'autenticar-usuario' },
       { label: 'Administrar Usuario', path: 'administrar-usuario' },
       { label: 'Administrar Inventario', path: 'administrar-inventario' },
       { label: 'Generar Reportes', path: 'generar-reportes' },
     ],
     Coordinador: [
-      { label: 'Autenticar Usuario', path: 'autenticar-usuario' },
       { label: 'Administrar Usuario', path: 'administrar-usuario' },
       { label: 'Administrar Solicitudes', path: 'administrar-solicitudes' },
       { label: 'Administrar Préstamo', path: 'administrar-prestamo' },
     ],
     Penolero: [
-      { label: 'Autenticar Usuario', path: 'autenticar-usuario' },
       { label: 'Administrar Inventario', path: 'administrar-inventario' },
       { label: 'Administrar Solicitudes', path: 'administrar-solicitudes' },
       { label: 'Administrar Préstamos', path: 'administrar-prestamos' },
