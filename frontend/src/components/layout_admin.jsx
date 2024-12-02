@@ -11,7 +11,6 @@ import inventoryData from '../data/inventory_data'
 const Layout_admin = ({ onLogout }) => {
   return (
     <div className='layout'>
-      <h1 className='layout__title'>escula prestigiosa</h1>
       <NavBar />
       <button onClick={onLogout}>Logout</button> {/* Botón de logout */}
       <div className='layout__page'>

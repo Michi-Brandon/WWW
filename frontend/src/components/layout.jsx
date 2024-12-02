@@ -8,7 +8,6 @@ import UserPage from '../pages/user_page';
 const Layout = ({ onLogout }) => {
   return (
     <div className='layout'>
-      <h1 className='layout__title'>Escuela Prestigiosa</h1>
       <NavBar />
       <div className='layout__page'>
         <button onClick={onLogout}>Logout</button> {/* Botón de logout */}

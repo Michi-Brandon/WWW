@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const NavBar = () => {
-  const [role, setRole] = useState('superAdministrador'); // Estado inicial con el rol por defecto
+  const [role, setRole] = useState('superAdministrador');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinkClass = ({ isActive }) => {
-    const classes = ['nav-bar__link'];
-    if (isActive) classes.push('nav-bar__link--active');
+    const classes = ['nav-link'];
+    if (isActive) classes.push('active');
     return classes.join(' ');
   };
 
-  // Opciones de navegación por rol
   const menuOptions = {
     superAdministrador: [
       { label: 'Administrar Usuario', path: 'administrar-usuario' },
@@ -26,32 +26,100 @@ const NavBar = () => {
       { label: 'Administrar Inventario', path: 'administrar-inventario' },
       { label: 'Administrar Solicitudes', path: 'administrar-solicitudes' },
       { label: 'Administrar Préstamos', path: 'administrar-prestamos' },
-      { label: 'Generar Reporte', path: 'generar-reporte' },
+      { label: 'Generar Reporte', path: 'generar-reportes' },
     ],
   };
 
   return (
     <div>
-      <nav className='nav-bar'>
-        {menuOptions[role]?.map((option, index) => (
-          <NavLink key={index} className={navLinkClass} to={option.path}>
-            {option.label}
-          </NavLink>
-        ))}
+      {/* Navbar responsiva */}
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div className="container-fluid">
+          <button
+            className="navbar-toggler d-lg-none"
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-controls="offcanvasMenu"
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <span className="navbar-brand">Sistema</span>
+
+          <div className="collapse navbar-collapse d-none d-lg-flex">
+            <ul className="navbar-nav me-auto">
+              {menuOptions[role]?.map((option, index) => (
+                <li key={index} className="nav-item">
+                  <NavLink className={navLinkClass} to={option.path}>
+                    {option.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+            <div className="d-flex align-items-center ms-auto">
+              <label htmlFor="role" className="text-white me-2">
+                Rol:
+              </label>
+              <select
+                id="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="form-select form-select-sm"
+              >
+                <option value="superAdministrador">Super Administrador</option>
+                <option value="Coordinador">Coordinador</option>
+                <option value="Penolero">Penolero</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </nav>
 
-      {/* Selector para cambiar de rol */}
-      <div className='role-selector'>
-        <label htmlFor='role'>Selecciona un rol: </label>
-        <select id='role' value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value='superAdministrador'>Super Administrador</option>
-          <option value='Coordinador'>Coordinador</option>
-          <option value='Penolero'>Penolero</option>
-        </select>
-      </div>
+      {/* Menú off-canvas */}
+      {isMenuOpen && (
+        <div className="offcanvas-menu">
+          <div className="offcanvas-header">
+            <button
+              className="btn-close btn-close-white"
+              onClick={() => setIsMenuOpen(false)}
+            ></button>
+          </div>
+          <div className="offcanvas-body">
+            <ul className="list-unstyled">
+              {menuOptions[role]?.map((option, index) => (
+                <li key={index} className="nav-item">
+                  <NavLink
+                    className={navLinkClass}
+                    to={option.path}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {option.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-3">
+              <label htmlFor="role-mobile" className="text-white">
+                Rol:
+              </label>
+              <select
+                id="role-mobile"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="form-select"
+              >
+                <option value="superAdministrador">Super Administrador</option>
+                <option value="Coordinador">Coordinador</option>
+                <option value="Penolero">Penolero</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default NavBar;
-
