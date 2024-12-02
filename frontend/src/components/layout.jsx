@@ -1,24 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from '../pages/home_page';
 import SolidPage from '../pages/solicitud_page';
 import NavBar from '../components/nav_bar';
 import UserPage from '../pages/user_page';
+import axios from 'axios';
 
-import materials from '../data/card_data';
+//import materials from '../data/card_data';
 import requests from '../data/solicitud_data';
 
-
-
 const Layout = ({ onLogout }) => {
+  const [materials, setMaterials] = useState([]);
+
+  // Obtener los materiales de la API
+  useEffect(() => {
+    console.log('Obteniendo materiales...');
+    getMaterials();
+  }, []);
+
+  const getMaterials = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/inventory');
+      const data = await response.data;
+      //console.log('inventario: ',data);
+      setMaterials(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // Función para manejar el clic en el botón de MaterialCard
-  const handleMaterialCardClick = (itemName) => {
-    const userName = 'Usuario Ejemplo'; // Puedes modificar esto para obtener el usuario real
+  const handleMaterialCardClick = (item) => {
+    const userName = localStorage.name; // Puedes modificar esto para obtener el usuario real
     const date = new Date().toLocaleString(); // Fecha y hora actual
 
-    console.log(`Artículo: ${itemName}, Usuario: ${userName}, Fecha: ${date}`);
+    console.log(`Artículo: ${item}, Usuario: ${userName}, Fecha: ${date}`);
     // Aquí podrías añadir lógica para registrar el préstamo en tu base de datos o sistema
+
+    const requestData = {
+      "requesterId": localStorage.id,
+      "resourceId": item._id,
+      "requestDate": date
+    };
+    console.log(requestData);
+    // Lógica adicional para enviar la solicitud al backend
+    try {
+      axios.post('http://localhost:5000/api/requests', requestData);
+      console.log('Solicitud enviada');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Función para generar un ticket en SolidPage

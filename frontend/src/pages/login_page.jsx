@@ -24,6 +24,7 @@ const Login = ({ onLogin }) => {
       localStorage.setItem('email', data.user.email);
       localStorage.setItem('role', data.user.role);
       localStorage.setItem('name', data.user.name);
+      localStorage.setItem('id', data.user._id);
 
       console.log(localStorage);
       

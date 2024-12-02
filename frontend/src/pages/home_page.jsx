@@ -74,7 +74,7 @@ export const HomePage = ({ materials, handleMaterialCardClick }) => {
           title={selectedMaterial.title}
           description={selectedMaterial.description}
           quantity={selectedMaterial.quantity}
-          onButtonClick={() => handleMaterialCardClick(selectedMaterial.title)}
+          onButtonClick={() => handleMaterialCardClick(selectedMaterial)}
           />
       )}
     </>
