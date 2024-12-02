@@ -3,9 +3,9 @@ const Request = require('../models/Request');
 
 // Crear una nueva solicitud
 const createRequest = async (req, res) => {
-  const { requesterId, requestedResources } = req.body;
+  const { requesterId, resourceId } = req.body;
   try {
-    const newRequest = new Request({ requesterId, requestedResources, requestDate: new Date() });
+    const newRequest = new Request({ requesterId, resourceId, requestDate: new Date() });
     await newRequest.save();
     res.status(201).json(newRequest);
   } catch (error) {
