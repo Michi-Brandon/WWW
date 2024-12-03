@@ -76,6 +76,34 @@ const protect = (req, res, next) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  const { id } = req.params; // ID del usuario a actualizar
+  const { name, lastName, email, carrera, estado } = req.body; // Nuevos datos
+
+  try {
+    // Verificar si el usuario existe
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Actualizar los campos del usuario
+    user.name = name || user.name;
+    user.lastName = lastName || user.lastName;
+    user.email = email || user.email;
+    user.carrera = carrera || user.carrera;
+    user.estado = estado || user.estado;
+
+    // Guardar el usuario actualizado
+    await user.save();
+
+    return res.status(200).json({ message: 'Usuario actualizado con éxito', user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al actualizar el usuario' });
+  }
+};
+
 // Solo para admin
 const admin = (req, res, next) => {
   // Verificar si el usuario tiene rol de admin
@@ -85,4 +113,4 @@ const admin = (req, res, next) => {
   next();
 };
 
-module.exports = { registerUser, loginUser, protect, admin };
+module.exports = { registerUser, loginUser, updateUser , protect, admin };
