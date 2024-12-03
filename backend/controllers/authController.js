@@ -93,6 +93,11 @@ const updateUser = async (req, res) => {
     user.email = email || user.email;
     user.carrera = carrera || user.carrera;
     user.estado = estado || user.estado;
+    if (password) {
+      const salt = await bcrypt.genSalt(10); // Generar el salt
+      const hashedPassword = await bcrypt.hash(password, salt); // Hashear la contraseña
+      user.password = hashedPassword; // Asignar la nueva contraseña hasheada
+    }
 
     // Guardar el usuario actualizado
     await user.save();
