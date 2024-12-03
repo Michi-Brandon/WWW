@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerUser, loginUser, protect, admin, updateUser, blockUser } = require('../controllers/authController');
+const { registerUser, loginUser, protect, admin, updateUser, blockUser, getAllUsers } = require('../controllers/authController');
 const router = express.Router();
 
 // Ruta para registrar un nuevo usuario
@@ -13,6 +13,9 @@ router.put('/:id', updateUser);
 
 // Ruta para cambiar estado de usuario
 router.put('/block/:id', blockUser);
+
+// Ruta para obtener a todos los usuarios
+router.get('/', getAllUsers);
 
 // Ruta protegida solo para admin
 router.get('/admin', protect, admin, (req, res) => {

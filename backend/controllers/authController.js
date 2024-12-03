@@ -127,6 +127,16 @@ const blockUser = async (req, res) => {
   }
 }
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();  // Obtiene todos los usuarios
+    res.status(200).json(users);  // Devuelve la lista de usuarios
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al obtener los usuarios' });
+  }
+};
+
 // Solo para admin
 const admin = (req, res, next) => {
   // Verificar si el usuario tiene rol de admin
@@ -136,4 +146,4 @@ const admin = (req, res, next) => {
   next();
 };
 
-module.exports = { registerUser, loginUser, updateUser, blockUser , protect, admin };
+module.exports = { registerUser, loginUser, updateUser, blockUser , protect, admin, getAllUsers };
