@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const InventoryTable = ({ inventoryData, darDeBaja }) => {
-  console.log(inventoryData)
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   // Detectar tamaño de la pantalla
@@ -40,7 +39,7 @@ const InventoryTable = ({ inventoryData, darDeBaja }) => {
                 <td>
                   <button
                     className="btn btn-primary btn-sm"
-                    onClick={() => darDeBaja(item.title, index)}
+                    onClick={() => darDeBaja(item, index)}
                   >
                     Dar de baja
                   </button>
