@@ -78,7 +78,7 @@ const protect = (req, res, next) => {
 
 const updateUser = async (req, res) => {
   const { id } = req.params; // ID del usuario a actualizar
-  const { name, lastName, email, carrera, estado } = req.body; // Nuevos datos
+  const { name, lastName, email, carrera, estado, password } = req.body; // Nuevos datos
 
   try {
     // Verificar si el usuario existe
@@ -93,10 +93,8 @@ const updateUser = async (req, res) => {
     user.email = email || user.email;
     user.carrera = carrera || user.carrera;
     user.estado = estado || user.estado;
-    if (password) {
-      const salt = await bcrypt.genSalt(10); // Generar el salt
-      const hashedPassword = await bcrypt.hash(password, salt); // Hashear la contraseña
-      user.password = hashedPassword; // Asignar la nueva contraseña hasheada
+    if (password != "") {
+      user.password = password; // Asignar la nueva contraseña hasheada
     }
 
     // Guardar el usuario actualizado

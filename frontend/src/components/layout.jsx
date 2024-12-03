@@ -105,6 +105,15 @@ const Layout = ({ onLogout }) => {
     localStorage.setItem('email', formData.email);
 
     // Aquí puedes agregar la lógica para enviar los datos al backend si es necesario
+    try {
+      axios.put('http://localhost:5000/api/auth/'+localStorage.getItem('id'), updatedUser);
+      console.log('Usuario actualizado: ', updatedUser);
+    } catch (error) {
+      console.error(error);
+    }
+
+
+
     setIsEditing(false);
   };
 

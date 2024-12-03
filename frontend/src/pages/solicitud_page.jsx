@@ -10,12 +10,12 @@ const RequestList = ({ requests = [], selectedRequest, onSelect, page, setPage, 
       <ul>
         {paginatedRequests.map((request) => (
           <li
-            key={request.id}
-            className={selectedRequest?.id === request.id ? 'active' : ''}
+            key={request._id}
+            className={selectedRequest?._id === request._id ? 'active' : ''}
             onClick={() => onSelect(request)}
           >
-            <div className="request-title">{request.title}</div>
-            <div className="request-date">{request.date}</div>
+            <div className="request-title">{request.inventoryName}</div>
+            <div className="request-date">{request.requestDate}</div>
           </li>
         ))}
       </ul>
@@ -44,13 +44,13 @@ const RequestDetails = ({ selectedRequest, onClose, onButtonClick }) => {
         <>
           <h2>Detalles de la Solicitud</h2>
           <p>
-            <strong>Nombre:</strong> {selectedRequest.title}
+            <strong>Nombre:</strong> {selectedRequest.inventoryName}
           </p>
           <p>
-            <strong>Descripción:</strong> {selectedRequest.description}
+            <strong>Descripción:</strong> {selectedRequest.inventoryDescription}
           </p>
           <p>
-            <strong>Fecha de Petición:</strong> {selectedRequest.date}
+            <strong>Fecha de Petición:</strong> {selectedRequest.requestDate}
           </p>
           <p>
             <strong>Estado:</strong>{' '}

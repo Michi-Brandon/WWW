@@ -12,7 +12,7 @@ const solicitudSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  lastname : {type: String, required: false},
+  lastName : {type: String, required: false},
   email: { type: String, required: true, unique: true },
   rut: { type: String},
   carrera: { type: String, required: false },
