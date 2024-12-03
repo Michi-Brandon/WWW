@@ -1,0 +1,133 @@
+.solid-page-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .request-list {
+    flex: 1 1 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .request-list h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .request-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .request-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .request-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .request-item.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .request-title {
+    font-weight: bold;
+  }
+  
+  .request-date {
+    font-size: 12px;
+    color: #777;
+  }
+  
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .pagination-controls button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .page-indicator {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .request-details {
+    flex: 1 1 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .request-details h2 {
+    margin-bottom: 20px;
+  }
+  
+  .details-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .btn-common {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .download-ticket {
+    background-color: #28a745;
+  }
+  
+  .close-button {
+    background-color: #dc3545;
+  }
+  
+  .bg-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .bg-success {
+    color: #155724;
+    background-color: #d4edda;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .bg-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
