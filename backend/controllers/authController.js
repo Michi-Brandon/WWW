@@ -117,7 +117,7 @@ const blockUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
-    user.estado = user.estado === 0 ? 1 : 0; // Cambiar el estado
+    user.estado = user.estado === true ? false : true; // Cambiar el estado
     await user.save(); // Guardar el usuario actualizado
 
     return res.status(200).json({ message: 'Usuario actualizado con éxito', user });

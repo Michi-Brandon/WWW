@@ -4,7 +4,7 @@ const inventoryData = [
       name: "El Quijote",
       category: "Libros",
       description: "Una novela clásica de Miguel de Cervantes.",
-      quantity: 4,
+      quantity: 0,
       status: "Disponible",
       borrower: null
     },

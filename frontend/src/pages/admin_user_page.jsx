@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const UserList = ({ users, selectedUser, onSelect, page, setPage, itemsPerPage }) => {
   const startIndex = (page - 1) * itemsPerPage;
@@ -28,9 +28,9 @@ const UserList = ({ users, selectedUser, onSelect, page, setPage, itemsPerPage }
       <ul className="list-group list-group-flush">
         {paginatedUsers.map((user) => (
           <li
-            key={user.id}
+            key={user._id}
             className={`list-group-item ${
-              selectedUser?.id === user.id ? 'active' : ''
+              selectedUser?._id === user._id ? 'active' : ''
             }`}
             onClick={() => onSelect(user)}
             style={{ cursor: 'pointer' }}
@@ -51,7 +51,7 @@ const UserDetails = ({ selectedUser, onBlock }) => {
     return <p>Selecciona un usuario para ver los detalles.</p>;
   }
 
-  const { lastName, name, email, rut, career, requests } = selectedUser;
+  const { lastName, name, email, rut, career, requests, estado } = selectedUser;
 
   return (
     <div className="card h-100">
@@ -80,18 +80,31 @@ const UserDetails = ({ selectedUser, onBlock }) => {
             <li>Atrasadas: {requests?.overdue || 0}</li>
           </ul>
         </div>
-        <button className="btn btn-danger" onClick={() => onBlock(selectedUser.id)}>
-          {selectedUser.estado ? 'Desbloquear Usuario' : 'Bloquear Usuario'}
+        <button
+          className={`btn ${estado ? 'btn-success' : 'btn-danger'}`}
+          onClick={() => onBlock(selectedUser._id)}
+        >
+          {estado ? 'Desbloquear Usuario' : 'Bloquear Usuario'}
         </button>
       </div>
     </div>
   );
 };
 
-const AdminUser = ({ users, onButtonClick}) => {
+const AdminUser = ({ users, onButtonClick }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
+
+  // Efecto para actualizar el usuario seleccionado cuando cambien los usuarios
+  useEffect(() => {
+    if (selectedUser) {
+      const updatedUser = users.find((user) => user._id === selectedUser._id);
+      if (updatedUser) {
+        setSelectedUser(updatedUser);
+      }
+    }
+  }, [users]);
 
   return (
     <div className="container mt-4">
