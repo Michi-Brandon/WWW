@@ -24,8 +24,7 @@ const userSchema = new mongoose.Schema({
   },
   solicitudes: { type: solicitudSchema, default: () => ({}), required: false},
   estado: {
-    type: String,
-    enum: ['Habilitado', 'Bloqueado'], // Solo permite estos valores
+    type: Boolean, //Bloqueado: 1 - Activo: 0
     required: false,
   },
 }, { timestamps: true });

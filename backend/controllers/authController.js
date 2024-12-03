@@ -107,6 +107,26 @@ const updateUser = async (req, res) => {
   }
 };
 
+// Toggle block user
+const blockUser = async (req, res) => {
+  const { id } = req.params; // ID del usuario a bloquear/desbloquear
+
+  try {
+    // Verificar si el usuario existe
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    user.estado = user.estado === 0 ? 1 : 0; // Cambiar el estado
+    await user.save(); // Guardar el usuario actualizado
+
+    return res.status(200).json({ message: 'Usuario actualizado con éxito', user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al bloquear/desbloquear usuario' });
+  }
+}
+
 // Solo para admin
 const admin = (req, res, next) => {
   // Verificar si el usuario tiene rol de admin
@@ -116,4 +136,4 @@ const admin = (req, res, next) => {
   next();
 };
 
-module.exports = { registerUser, loginUser, updateUser , protect, admin };
+module.exports = { registerUser, loginUser, updateUser, blockUser , protect, admin };

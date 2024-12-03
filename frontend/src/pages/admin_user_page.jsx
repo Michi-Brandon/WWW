@@ -81,7 +81,7 @@ const UserDetails = ({ selectedUser, onBlock }) => {
           </ul>
         </div>
         <button className="btn btn-danger" onClick={() => onBlock(selectedUser.id)}>
-          {selectedUser.isBlocked ? 'Desbloquear Usuario' : 'Bloquear Usuario'}
+          {selectedUser.estado ? 'Desbloquear Usuario' : 'Bloquear Usuario'}
         </button>
       </div>
     </div>
@@ -92,11 +92,6 @@ const AdminUser = ({ users, onButtonClick}) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
-
-  const handleBlockUser = (userId) => {
-    // Aquí actualizas el estado del usuario (bloqueado o desbloqueado)
-    console.log(`Bloqueando o desbloqueando al usuario con ID: ${userId}`);
-  };
 
   return (
     <div className="container mt-4">

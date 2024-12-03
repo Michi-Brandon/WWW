@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import NavBar from '../components/nav_bar_admin'
 import AdminSection from '../pages/admin_page'
@@ -6,6 +6,7 @@ import AdminUser from '../pages/admin_user_page'
 import InventoryTable from '../pages/inventory_page'
 import AdminSolid from '../pages/solid_aprobate_page'
 import GenerateReports from '../pages/reports_page'
+import axios from 'axios'
 
 import inventoryData from '../data/inventory_data'
 import solidData from '../data/admin_solid_data'
@@ -17,10 +18,41 @@ const Layout_admin = ({ onLogout }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
+  const [users, setUsers] = useState([]);
 
-  const handleBlockUser = (userId) => {
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  // Fetch usuarios
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get('/api/auth/');
+      setUsers(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleBlockUser = async (userId) => {
     // Aquí actualizas el estado del usuario (bloqueado o desbloqueado)
     console.log(`Bloqueando o desbloqueando al usuario con ID: ${userId}`);
+
+    try {
+      // Actualizar el estado del usuario
+      const res = await axios.put(`/api/users/block/${userId}`);
+      console.log("usuario bloqueado/desbloqueado con éxito");
+
+      // Actualizar la lista de usuarios
+      users = users.map((user) => {
+        if (user.id === userId) {
+          return { ...user, isBlocked: !user.isBlocked };
+        }
+        return user;
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // ------------------------------------inventoruTable------------------------------
