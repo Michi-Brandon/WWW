@@ -10,8 +10,9 @@ import axios from 'axios'
 
 import inventoryData from '../data/inventory_data'
 import solidData from '../data/admin_solid_data'
-import users from '../data/user_data'; // Suponiendo que tienes un archivo con los datos de usuarios
-import generalInventory from '../data/repor_data';
+import users from '../data/user_data'
+import generalInventory from '../data/repor_data'
+import PrestamoSection from '../pages/admin_prestamo_page'
 
 const Layout_admin = ({ onLogout }) => {
   // ---------------------adminUser------------------------------------------------
@@ -86,7 +87,7 @@ const Layout_admin = ({ onLogout }) => {
             <AdminSolid solidData={solidData} onButtonClick={handleApprove}/>} 
           />
           <Route path='administrar-prestamo' element={
-            <AdminSection />} 
+            <PrestamoSection />} 
           />
         </Routes>
       </div>
