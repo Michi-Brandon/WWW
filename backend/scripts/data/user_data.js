@@ -20,7 +20,7 @@ const users = [
         aceptadas: 7,
         atrasadas: 2,
       },
-      estado: "Habilitado",
+      estado: 1,
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ const users = [
         aceptadas: 5,
         atrasadas: 0,
       },
-      estado: "Bloqueado",
+      estado: 0,
     },
     {
       id: 3,
@@ -50,7 +50,7 @@ const users = [
         aceptadas: 3,
         atrasadas: 1,
       },
-      estado: "Habilitado",
+      estado: 1,
     },
     {
       id: 4,
@@ -65,7 +65,7 @@ const users = [
         aceptadas: 6,
         atrasadas: 0,
       },
-      estado: "Bloqueado",
+      estado: 0,
     },
     {
       id: 5,
@@ -80,7 +80,7 @@ const users = [
         aceptadas: 9,
         atrasadas: 1,
       },
-      estado: "Habilitado",
+      estado: 1,
     },
   ];
   
