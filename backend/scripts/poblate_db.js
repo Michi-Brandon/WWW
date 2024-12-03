@@ -7,6 +7,9 @@ const Request = require('../models/Request');
 const Loan = require('../models/Loan');
 const Alert = require('../models/Alert');
 
+const getUsersWithHashedPasswords = require('./data/user_data');
+const inv_data = require('./data/inventory_data.js');
+
 dotenv.config();
 
 const connectDB = async () => {
@@ -31,120 +34,46 @@ const seedData = async () => {
     await Alert.deleteMany({});
 
     // Crear Usuarios
-    const users = await User.insertMany([
-      {
-        firstName: 'Carlos',
-        lastName1: 'Soto',
-        lastName2: 'Gómez',
-        email: 'carlos.soto@example.com',
-        phoneNumber: '123456789',
-        role: 'Student',
-        idNumber: 'A1234567',
-        career: 'Ingeniería Electrónica',
-        password: 'password123', // La contraseña será cifrada por el middleware pre('save')
-      },
-      {
-        firstName: 'Ana',
-        lastName1: 'Martínez',
-        lastName2: 'Pérez',
-        email: 'ana.martinez@example.com',
-        phoneNumber: '987654321',
-        role: 'Student',
-        idNumber: 'B2345678',
-        career: 'Ingeniería Mecánica',
-        password: 'password123',
-      },
-      {
-        firstName: 'Marta',
-        lastName1: 'Gómez',
-        lastName2: 'Rojas',
-        email: 'marta.gomez@example.com',
-        phoneNumber: '567123456',
-        role: 'Teacher',
-        idNumber: 'T3456789',
-        career: 'Ingeniería Electrónica',
-        password: 'password123',
-      },
-      {
-        firstName: 'Roberto',
-        lastName1: 'Pérez',
-        lastName2: 'López',
-        email: 'roberto.perez@example.com',
-        phoneNumber: '456789123',
-        role: 'Coordinator',
-        idNumber: 'C4567890',
-        career: 'Ingeniería Electrónica',
-        password: 'password123',
-      },
-      {
-        firstName: 'Luis',
-        lastName1: 'Hernández',
-        lastName2: 'Cruz',
-        email: 'luis.hernandez@example.com',
-        phoneNumber: '123123123',
-        role: 'StoreroomManager',
-        idNumber: 'P5678901',
-        password: 'password123',
-      },
-      {
-        firstName: 'Lucía',
-        lastName1: 'Ramírez',
-        lastName2: 'Blanco',
-        email: 'lucia.ramirez@example.com',
-        phoneNumber: '789789789',
-        role: 'Admin',
-        idNumber: 'A6789012',
-        password: 'password123',
-      },
-    ]);
+    const usersWithHashedPasswords = await getUsersWithHashedPasswords();
+    const users = await User.insertMany(usersWithHashedPasswords);
 
-    // Crear Inventario
-    const inventoryItems = await Inventory.insertMany([
-      {
-        name: 'Taladro Eléctrico',
-        category: 'Herramienta',
-        description: 'Taladro para uso general.',
-        quantity: 5,
-        status: 'active',
-      },
-      {
-        name: 'Multímetro',
-        category: 'Instrumento',
-        description: 'Multímetro digital para medir voltaje y resistencia.',
-        quantity: 10,
-        status: 'active',
-      },
-      {
-        name: 'Cinta Métrica',
-        category: 'Herramienta',
-        description: 'Cinta métrica de 5 metros.',
-        quantity: 20,
-        status: 'active',
-      },
-    ]);
+    // Modificar inventoryData para usar los ObjectId de los usuarios
+    const updatedInventoryData = inv_data.map(item => {
+      // Asignar un usuario aleatorio (o específico) a los campos 'borrower'
+      if (item.borrower) {
+        // Asegúrate de asignar un ObjectId válido, si no existe puedes hacer referencia al primer usuario (ejemplo)
+        const user = users.find(user => user.email === item.borrower.email);
+        if (user) {
+          item.borrower = user._id;  // Asigna el ObjectId del usuario
+        } else {
+          item.borrower = null;  // Si no hay un usuario, asigna null
+        }
+      }
+      return item;
+    });
 
-    // Crear Solicitudes
+    // Crear Inventario con los datos actualizados
+    const inventoryItems = await Inventory.insertMany(updatedInventoryData);
+
     const requests = await Request.insertMany([
       {
-        requesterId: users[0]._id,
-        requestedResources: [
-          { resourceId: inventoryItems[0]._id, quantity: 1 },
-          { resourceId: inventoryItems[1]._id, quantity: 1 },
-        ],
+        requesterId: users[0]._id,  // Juan Pérez
+        resourceId: inventoryItems[0]._id,  // 'El Quijote'
         requestDate: new Date(),
         status: 'pending',
+        inventoryName: inventoryItems[0].name,
+        inventoryDescription: inventoryItems[0].description,
       },
       {
-        requesterId: users[1]._id,
-        requestedResources: [
-          { resourceId: inventoryItems[2]._id, quantity: 1 },
-        ],
+        requesterId: users[1]._id,  // María Gómez
+        resourceId: inventoryItems[1]._id,  // 'Matemáticas Avanzadas'
         requestDate: new Date(),
         status: 'pending',
+        inventoryName: inventoryItems[1].name,
+        inventoryDescription: inventoryItems[1].description,
       },
     ]);
 
-    // Crear Préstamos
     const loans = await Loan.insertMany([
       {
         borrowerId: users[0]._id,
@@ -156,9 +85,8 @@ const seedData = async () => {
         loanDate: new Date(),
         status: 'in-progress',
       },
-    ]);
+    ])
 
-    // Crear Alerta de Stock Bajo
     const alerts = await Alert.insertMany([
       {
         type: 'low-stock',

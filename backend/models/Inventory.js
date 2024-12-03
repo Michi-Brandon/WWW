@@ -6,12 +6,12 @@ const inventorySchema = new mongoose.Schema({
   category: { type: String, required: true },
   description: { type: String },
   quantity: { type: Number, required: true },
-  image: { type: String }, // Can be a URL or file path
   status: {
     type: String,
-    enum: ['active', 'decommissioned'],
-    default: 'active'
-  }
+    enum: ['Disponible', 'Prestado'],
+    default: 'Disponible'
+  },
+  borrower: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 }, { timestamps: true });
 
 module.exports = mongoose.model('Inventory', inventorySchema);
