@@ -29,6 +29,11 @@ const Layout_admin = ({ onLogout }) => {
     console.log(`Artículo: ${article}, con id: ${id || 1}, fue dado de baja`);
     // Lógica adicional para generar el ticket
   };
+  // ---------------------------------administrar solicitudes-------------
+  const handleApprove = (solid) => {
+    alert(`El préstamo de "${solid.product}" ha sido aprobado para el usuario ${solid.user.name}.`);
+    // Aquí puedes agregar la lógica para manejar la aprobación, como actualizar el estado o enviar la acción al backend.
+  };
 
   return (
     <div className='layout'>
@@ -46,7 +51,7 @@ const Layout_admin = ({ onLogout }) => {
             <GenerateReports generalInventory={generalInventory} />} 
           />
           <Route path='administrar-solicitudes' element={
-            <AdminSolid solidData={solidData}  />} 
+            <AdminSolid solidData={solidData} onButtonClick={handleApprove}/>} 
           />
           <Route path='administrar-prestamo' element={
             <AdminSection />} 

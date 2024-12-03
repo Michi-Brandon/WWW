@@ -3,11 +3,6 @@ import React, { useState } from 'react';
 const AdminSolid = ({ solidData, onButtonClick }) => {
   const [selectedSolid, setSelectedSolid] = useState(null);
 
-  const handleApprove = (solid) => {
-    alert(`El préstamo de "${solid.product}" ha sido aprobado para el usuario ${solid.user.name}.`);
-    // Aquí puedes agregar la lógica para manejar la aprobación, como actualizar el estado o enviar la acción al backend.
-  };
-
   return (
     <div className="container mt-4">
       <h2 className="text-center">Administrar Solicitudes</h2>
@@ -43,7 +38,7 @@ const AdminSolid = ({ solidData, onButtonClick }) => {
                 <p><strong>Fecha de Solicitud:</strong> {selectedSolid.date}</p>
                 <button
                   className="btn btn-success"
-                  onClick={() => handleApprove(selectedSolid)}
+                  onClick={() => onButtonClick(selectedSolid)}
                 >
                   Aprobar Préstamo
                 </button>
