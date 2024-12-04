@@ -13,20 +13,20 @@ const NavBar = ({ onButtonClick }) => {
 
   const menuOptions = {
     superAdministrador: [
-      { label: 'Administrar Usuario', path: 'administrar-usuario' },
-      { label: 'Administrar Inventario', path: 'administrar-inventario' },
-      { label: 'Generar Reportes', path: 'generar-reportes' },
+      { label: 'Administrar Usuario', path: 'usuarios' },
+      { label: 'Administrar Inventario', path: 'inventario' },
+      { label: 'Generar Reportes', path: 'reportes' },
     ],
     Coordinador: [
-      { label: 'Administrar Usuario', path: 'administrar-usuario' },
-      { label: 'Administrar Solicitudes', path: 'administrar-solicitudes' },
-      { label: 'Administrar Préstamo', path: 'administrar-prestamo' },
+      { label: 'Administrar Usuario', path: 'usuarios' },
+      { label: 'Administrar Solicitudes', path: 'solicitudes' },
+      { label: 'Administrar Préstamo', path: 'prestamo' },
     ],
     Penolero: [
-      { label: 'Administrar Inventario', path: 'administrar-inventario' },
-      { label: 'Administrar Solicitudes', path: 'administrar-solicitudes' },
-      { label: 'Administrar Préstamos', path: 'administrar-prestamos' },
-      { label: 'Generar Reportes', path: 'generar-reportes' },
+      { label: 'Administrar Inventario', path: 'inventario' },
+      { label: 'Administrar Solicitudes', path: 'solicitudes' },
+      { label: 'Administrar Préstamos', path: 'prestamos' },
+      { label: 'Generar Reportes', path: 'reportes' },
     ],
   };
 

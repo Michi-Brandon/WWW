@@ -61,7 +61,6 @@ const Layout_admin = ({ onLogout }) => {
   // Función para dar de baja productos
   const darDeBaja = (article, id) => {
     console.log(`Artículo: ${article}, con id: ${id || 1}, fue dado de baja`);
-    // Lógica adicional para generar el ticket
   };
 
   // Fetch general inventory data
@@ -91,19 +90,19 @@ const Layout_admin = ({ onLogout }) => {
       <div className='layout__page'>
         <Routes>
           <Route path='' element={<AdminSection />} />
-          <Route path='administrar-usuario' element={
+          <Route path='usuarios' element={
             <AdminUser users={users} onButtonClick={handleBlockUser}/>} 
             />
-          <Route path='administrar-inventario' element={
+          <Route path='inventario' element={
             <InventoryTable inventoryData={inventoryData} darDeBaja={darDeBaja}/>} 
           />
-          <Route path='generar-reportes' element={
+          <Route path='reportes' element={
             <GenerateReports generalInventory={generalInventory} />} 
           />
-          <Route path='administrar-solicitudes' element={
+          <Route path='solicitudes' element={
             <AdminSolid solidData={solidData} onButtonClick={handleApprove}/>} 
           />
-          <Route path='administrar-prestamo' element={
+          <Route path='prestamo' element={
             <PrestamoSection />} 
           />
         </Routes>

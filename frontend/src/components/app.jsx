@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../pages/login_page';
 import Layout from './Layout';
-import Layout_admin from './Layout_admin';
+import Layout_admin from './layout_admin';
 import Register from '../pages/register_page';
 
 const App = () => {
