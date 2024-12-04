@@ -41,7 +41,7 @@ export const HomePage = ({ materials, handleMaterialCardClick }) => {
                 description={material.description}
                 buttonText="Ver más"
                 onButtonClick={() => handleShow(material)} // Abrir el modal
-                isAvailable={material.isAvailable}
+                isAvailable={material.status}
               />
             </div>
           ))}

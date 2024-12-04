@@ -29,7 +29,7 @@ const Layout = ({ onLogout }) => {
     try {
       const response = await axios.get('http://localhost:5000/api/inventory');
       const data = await response.data;
-      //console.log('inventario: ',data);
+      console.log('inventario: ',data);
       setMaterials(data);
     } catch (error) {
       console.error(error);

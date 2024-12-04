@@ -18,11 +18,11 @@ const Card = ({ title, imageUrl, description, buttonText, onButtonClick, isAvail
       {/* Indicador de disponibilidad */}
       <span
         className={`badge position-absolute bottom-0 end-0 m-3 ${
-          isAvailable ? 'bg-success' : 'bg-danger'
+          isAvailable === 'Disponible' ? 'bg-success' : 'bg-danger'
         }`}
         style={{ fontSize: '0.9rem' }}
       >
-        {isAvailable ? 'Disponible' : 'No disponible'}
+        {isAvailable === 'Disponible' ? 'Disponible' : 'No disponible'}
       </span>
     </div>
   );
